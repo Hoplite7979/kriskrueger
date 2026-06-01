@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kris Krueger — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --bg-card: #141414;
+    --bg-card-hover: #1a1a1a;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #e8e6e0;
+    --text-muted: #888880;
+    --text-dim: #555550;
+    --accent: #4a9eff;
+    --accent-dim: rgba(74,158,255,0.12);
+    --accent-hover: rgba(74,158,255,0.2);
+    --green: #4ecb8d;
+    --amber: #f0a050;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --nav-h: 64px;
+  }
+
+  html { scroll-behavior: smooth; background: var(--bg); }
+  body {
+    font-family: var(--sans);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--accent); }
+
+  /* MAIN LAYOUT */
+  main { padding-top: var(--nav-h); }
+  section {
+    min-height: 100vh;
+    padding: 7rem 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  /* HERO */
+  #home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: calc(var(--nav-h) + 4rem);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+  }
+  .hero-name strong {
+    display: block;
+    font-weight: 500;
+    color: #fff;
+  }
+  .hero-tagline {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 520px;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+  .hero-tagline em {
+    color: var(--text);
+    font-style: normal;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    border: 1px solid var(--accent);
+  }
+  .btn-primary:hover { background: #6eb5ff; border-color: #6eb5ff; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-hover);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--border-hover); background: var(--bg-card); }
+
+  .hero-scroll {
+    margin-top: 5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+  }
+  .hero-scroll-line {
+    width: 40px; height: 1px;
+    background: var(--text-dim);
+    display: inline-block;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-bio h2 {
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    color: #fff;
+  }
+  .about-bio h2 strong { font-weight: 500; }
+  .about-bio p {
+    color: var(--text-muted);
+    font-size: 0.97rem;
+    line-height: 1.85;
+    margin-bottom: 1.25rem;
+  }
+  .about-bio p em { color: var(--text); font-style: normal; }
+
+  .about-sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+  .sidebar-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.4rem;
+  }
+  .sidebar-card h4 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+  .tag:hover { color: var(--text); border-color: var(--border-hover); }
+  .tag.accent { background: var(--accent-dim); border-color: rgba(74,158,255,0.25); color: var(--accent); }
+
+  .stat-row { display: flex; gap: 1.5rem; }
+  .stat { text-align: center; }
+  .stat-num {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: -0.02em;
+    display: block;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* PROJECTS */
+  .projects-intro {
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 0.85rem;
+  }
+  .projects-intro strong { font-weight: 500; }
+  .projects-sub {
+    color: var(--text-muted);
+    font-size: 0.97rem;
+    margin-bottom: 3rem;
+    max-width: 480px;
+  }
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    margin-bottom: 1px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .project-card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); }
+  .project-card:hover::before { opacity: 1; }
+  .project-card:first-of-type { border-radius: 8px 8px 0 0; }
+  .project-card:last-of-type { border-radius: 0 0 8px 8px; margin-bottom: 0; }
+  .project-header {
+    display: flex; align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+    gap: 1rem;
+  }
+  .project-name {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #fff;
+  }
+  .project-badge {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge-green { background: rgba(78,203,141,0.12); color: var(--green); border: 1px solid rgba(78,203,141,0.25); }
+  .badge-amber { background: rgba(240,160,80,0.12); color: var(--amber); border: 1px solid rgba(240,160,80,0.25); }
+  .badge-blue { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(74,158,255,0.25); }
+  .project-desc {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .project-desc em { color: var(--text); font-style: normal; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .tech-tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    padding: 0.15rem 0.5rem;
+    background: rgba(255,255,255,0.03);
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+
+  /* RUNNING */
+  .running-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: start;
+    margin-bottom: 3rem;
+  }
+  .running-header h2 {
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 0.85rem;
+  }
+  .running-header h2 strong { font-weight: 500; }
+  .running-header p { color: var(--text-muted); font-size: 0.97rem; line-height: 1.85; }
+  .running-header p em { color: var(--text); font-style: normal; }
+
+  .run-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+  .run-stat {
+    background: var(--bg-card);
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .run-stat-num {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: -0.03em;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .run-stat-num span { font-size: 1rem; color: var(--accent); font-weight: 400; }
+  .run-stat-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .race-list { display: flex; flex-direction: column; gap: 1px; }
+  .race-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.9rem 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .race-item:first-child { border-radius: 8px 8px 0 0; }
+  .race-item:last-child { border-radius: 0 0 8px 8px; }
+  .race-item:hover { background: var(--bg-card-hover); }
+  .race-dist {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(74,158,255,0.2);
+    padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+    white-space: nowrap;
+    min-width: 52px;
+    text-align: center;
+  }
+  .race-name {
+    font-size: 0.92rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+  .race-note {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .race-item.highlight .race-name { color: #fff; font-weight: 500; }
+  .race-item.highlight .race-dist {
+    background: rgba(78,203,141,0.12);
+    border-color: rgba(78,203,141,0.25);
+    color: var(--green);
+  }
+
+  /* RESUME */
+  .resume-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  .resume-section h3 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .resume-item { margin-bottom: 1.5rem; }
+  .resume-item-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.2rem; gap: 0.5rem;
+  }
+  .resume-item-title {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .resume-item-date {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .resume-item-org {
+    font-size: 0.82rem;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+  }
+  .resume-item-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .resume-downloads {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .resume-intro h2 {
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 0.85rem;
+  }
+  .resume-intro h2 strong { font-weight: 500; }
+  .resume-intro p {
+    color: var(--text-muted);
+    font-size: 0.97rem;
+    margin-bottom: 2rem;
+  }
+
+  .clearance-banner {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(78,203,141,0.06);
+    border: 1px solid rgba(78,203,141,0.18);
+    border-radius: 8px;
+    margin-top: 2.5rem;
+  }
+  .clearance-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .clearance-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .clearance-text strong { color: var(--green); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 900px; margin: 0 auto;
+  }
+  .footer-name {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* DIVIDER */
+  .section-divider {
+    height: 1px;
+    background: var(--border);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.35s; }
+  .delay-4 { animation-delay: 0.5s; }
+  .delay-5 { animation-delay: 0.65s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    section { padding: 5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .running-header { grid-template-columns: 1fr; }
+    .run-stats { grid-template-columns: repeat(3, 1fr); }
+    .resume-layout { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .hero-name { font-size: 2.8rem; }
+    .race-item { grid-template-columns: auto 1fr; }
+    .race-note { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-logo">kk<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#running">Running</a></li>
+    <li><a href="#resume">Resume</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- HOME -->
+  <section id="home">
+    <p class="hero-eyebrow fade-up">kris64aom@yahoo.com · Washington, DC</p>
+    <h1 class="hero-name fade-up delay-1">
+      Kris
+      <strong>Krueger.</strong>
+    </h1>
+    <p class="hero-tagline fade-up delay-2">
+      Software engineer and engineering lead with 4+ years building automation platforms, internal tooling, and test systems for hardware programs where reliability matters.
+      <br><br>
+      Outside of work, I run ultramarathons and build software for a small e-commerce business I operate.
+    </p>
+    <div class="hero-cta fade-up delay-3">
+      <a href="#projects" class="btn btn-primary">See my work</a>
+      <a href="https://linkedin.com/in/kristopher-krueger" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+    </div>
+    <div class="hero-scroll fade-up delay-5">
+      <span class="hero-scroll-line"></span>
+      scroll
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+      <div class="about-bio">
+        <h2>Software engineer<br><strong>and team lead.</strong></h2>
+        <p>
+          I'm a software engineer with 4+ years at Northrop Grumman writing automation platforms, shipping GUI features, deploying software at scale with <em>Ansible and Jenkins</em>, and leading engineering teams through complex delivery cycles.
+        </p>
+        <p>
+          I write production Python, run sprint planning, mentor engineers, manage codebases, stand up networked test environments, and build software that engineering teams use daily to validate flight hardware.
+        </p>
+        <p>
+          Outside of work I run an e-commerce business with real software behind it, work on lower-level C programming, and train for ultramarathons.
+        </p>
+        <p>
+          Currently looking for a <em>commercial software engineering role</em> where reliability and technical depth are valued.
+        </p>
+      </div>
+      <div class="about-sidebar">
+        <div class="sidebar-card">
+          <h4>Languages</h4>
+          <div class="skill-tags">
+            <span class="tag accent">Python</span>
+            <span class="tag accent">Bash</span>
+            <span class="tag accent">C</span>
+            <span class="tag">Tcl</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">MATLAB</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Tools & Infrastructure</h4>
+          <div class="skill-tags">
+            <span class="tag accent">Ansible</span>
+            <span class="tag accent">Jenkins</span>
+            <span class="tag">Git</span>
+            <span class="tag">BitBucket</span>
+            <span class="tag">Jira</span>
+            <span class="tag">Confluence</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>By the numbers</h4>
+          <div class="stat-row">
+            <div class="stat">
+              <span class="stat-num">4+</span>
+              <span class="stat-label">Years exp.</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">14</span>
+              <span class="stat-label">Engineers led</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">TS</span>
+              <span class="stat-label">Clearance</span>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Education</h4>
+          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6;">
+            B.S. Engineering — GPA 3.793<br>
+            <span style="color:var(--text-dim); font-size:0.8rem;">James Madison University, 2022</span><br>
+            <span style="color:var(--text-dim); font-size:0.8rem;">Minors: Math, Physics, Honors</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Projects</p>
+    <h2 class="projects-intro">Projects and <strong>side work.</strong></h2>
+    <p class="projects-sub">Tools and programs I've written outside of my day job, plus the business behind most of them.</p>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">Price Automation Tool</span>
+        <span class="project-badge badge-green">Active</span>
+      </div>
+      <p class="project-desc">
+        A Python program that cycles through my LEGO inventory listings on BrickLink and eBay, analyzes price history and sale velocity, and adjusts prices based on configurable rules. Supports item exclusions, cache management, and custom filters. Replaced a process that previously took hours of manual work.
+      </p>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">BrickLink API</span>
+        <span class="tech-tag">eBay API</span>
+        <span class="tech-tag">data analysis</span>
+        <span class="tech-tag">automation</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">Sales Tracker</span>
+        <span class="project-badge badge-green">Active</span>
+      </div>
+      <p class="project-desc">
+        A Python application that aggregates store metrics across my e-commerce operation, tracks sale history, and generates performance reports on demand. Shows what's selling, what's stagnant, and how the store is trending over time.
+      </p>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">data aggregation</span>
+        <span class="tech-tag">reporting</span>
+        <span class="tech-tag">CLI</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">Mandelbrot Set Generator</span>
+        <span class="project-badge badge-blue">GitHub</span>
+      </div>
+      <p class="project-desc">
+        A C program that renders the Mandelbrot set as an image. Resolution, coordinate bounds, and iteration depth are all configurable via command-line inputs. Written with a mentor as an exercise in lower-level programming.
+      </p>
+      <div class="project-tech">
+        <span class="tech-tag">C</span>
+        <span class="tech-tag">graphics</span>
+        <span class="tech-tag">mathematics</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">LEGO Reselling Business</span>
+        <span class="project-badge badge-amber">4 Years</span>
+      </div>
+      <p class="project-desc">
+        Started with my personal collection and grew into a reselling operation across BrickLink and eBay with thousands of active listings over four years. Most of my side project tooling is built to support this business.
+      </p>
+      <div class="project-tech">
+        <span class="tech-tag">e-commerce</span>
+        <span class="tech-tag">inventory management</span>
+        <span class="tech-tag">sourcing</span>
+        <span class="tech-tag">pricing strategy</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">This Website</span>
+        <span class="project-badge badge-blue">2026</span>
+      </div>
+      <p class="project-desc">
+        A personal portfolio site built as a single static HTML file. Covers my professional background, side projects, and running. Designed to deploy on GitHub Pages with no dependencies or build steps required.
+      </p>
+      <div class="project-tech">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">GitHub Pages</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">Up Next</span>
+        <span class="project-badge badge-amber">Planned</span>
+      </div>
+      <p class="project-desc">
+        An automated eBay listing tool, a GUI front end for the price automation system, and potentially packaging the tooling for other resellers. These are on hold while my full-time role takes priority.
+      </p>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">GUI</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">web</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- RUNNING -->
+  <section id="running">
+    <p class="section-label">Running</p>
+    <div class="running-header">
+      <div>
+        <h2>Ultrarunning.</h2>
+        <p>
+          Started running in 2020 during the pandemic. Built up slowly from short runs, dealt with injuries along the way, and worked up to a half marathon, then a full marathon, then 50Ks, and then longer. In October 2024 I finished my first 100-miler.
+        </p>
+        <br>
+        <p>
+          Currently maintaining 50-mile weeks and staying active on the bike and the mountain between running seasons.
+        </p>
+      </div>
+    </div>
+
+    <div class="run-stats">
+      <div class="run-stat">
+        <span class="run-stat-num">100<span>mi</span></span>
+        <span class="run-stat-label">Longest race</span>
+      </div>
+      <div class="run-stat">
+        <span class="run-stat-num">50<span>+</span></span>
+        <span class="run-stat-label">Miles/week</span>
+      </div>
+      <div class="run-stat">
+        <span class="run-stat-num">10<span>+</span></span>
+        <span class="run-stat-label">Races finished</span>
+      </div>
+    </div>
+
+    <div class="race-list">
+      <div class="race-item highlight">
+        <span class="race-dist">100 mi</span>
+        <span class="race-name">Rails to Trails Extravaganza</span>
+        <span class="race-note">Oct 2024 · First 100</span>
+      </div>
+      <div class="race-item">
+        <span class="race-dist">50 mi</span>
+        <span class="race-name">JFK 50 Miler</span>
+        <span class="race-note">One of the oldest ultras in the U.S.</span>
+      </div>
+      <div class="race-item">
+        <span class="race-dist">50K</span>
+        <span class="race-name">Marine Corps 50K</span>
+        <span class="race-note">Washington, DC</span>
+      </div>
+      <div class="race-item">
+        <span class="race-dist">50K</span>
+        <span class="race-name">Seneca Creek Greenway 50K</span>
+        <span class="race-note">Multiple finishes</span>
+      </div>
+      <div class="race-item">
+        <span class="race-dist">Trail</span>
+        <span class="race-name">Endless Summer Trail Runs, Annapolis</span>
+        <span class="race-note">Multiple finishes</span>
+      </div>
+      <div class="race-item">
+        <span class="race-dist">26.2 mi</span>
+        <span class="race-name">Virginia Marathon</span>
+        <span class="race-note">Charlottesville, VA</span>
+      </div>
+      <div class="race-item">
+        <span class="race-dist">26.2 mi</span>
+        <span class="race-name">International Peace Marathon</span>
+        <span class="race-note">DC metro area</span>
+      </div>
+      <div class="race-item">
+        <span class="race-dist">13.1 mi</span>
+        <span class="race-name">Philly Love Run Half Marathon</span>
+        <span class="race-note">Philadelphia, PA</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- RESUME -->
+  <section id="resume">
+    <p class="section-label">Resume</p>
+    <div class="resume-intro">
+      <h2>Background and <strong>experience.</strong></h2>
+      <p>4+ years in software engineering and team leadership. Condensed version below, full resume available to download.</p>
+      <div class="resume-downloads">
+        <a href="KrisKruegerResumeWeb.pdf" class="btn btn-primary" download>Download Resume ↓</a>
+        <a href="https://linkedin.com/in/kristopher-krueger" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <div class="resume-layout">
+      <div class="resume-section">
+        <h3>Experience</h3>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Engineering Lead · Test Software Eng.</span>
+            <span class="resume-item-date">2024–Now</span>
+          </div>
+          <div class="resume-item-org">Northrop Grumman</div>
+          <div class="resume-item-desc">Deputy Product Owner and SME for a large GUI-based test platform. Deploy software at scale with Ansible/Jenkins. Build features in Python, Tcl, Bash. Lead team operations and mentor engineers.</div>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Systems & Integration Engineer</span>
+            <span class="resume-item-date">2022–2024</span>
+          </div>
+          <div class="resume-item-org">Northrop Grumman</div>
+          <div class="resume-item-desc">Automated hardware testing, analyzed flight equipment data, delivered 25 RF systems and computers, developed test software features.</div>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Software & Hardware Eng. Intern</span>
+            <span class="resume-item-date">2021–2022</span>
+          </div>
+          <div class="resume-item-org">AEVEX Aerospace</div>
+          <div class="resume-item-desc">Led R&D project to prototype a wireless touchscreen device for aircraft maintenance. Designed LiDAR mounting system with full CAD models.</div>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Undergraduate Research Assistant</span>
+            <span class="resume-item-date">2019–2022</span>
+          </div>
+          <div class="resume-item-org">James Madison University</div>
+          <div class="resume-item-desc">Built MATLAB and Python tools for molecular spectra analysis. Maintained physical chemistry lab equipment.</div>
+        </div>
+      </div>
+
+      <div class="resume-section">
+        <h3>Skills</h3>
+        <div class="resume-item">
+          <div class="resume-item-desc" style="margin-bottom:0.75rem;">
+            <strong style="color:var(--text); font-size:0.82rem;">Languages</strong><br>
+            Python, Bash, C, Tcl, JavaScript, HTML/CSS, MATLAB
+          </div>
+          <div class="resume-item-desc" style="margin-bottom:0.75rem;">
+            <strong style="color:var(--text); font-size:0.82rem;">Infrastructure & DevOps</strong><br>
+            Ansible, Jenkins, Git, BitBucket, CI/CD pipelines
+          </div>
+          <div class="resume-item-desc" style="margin-bottom:0.75rem;">
+            <strong style="color:var(--text); font-size:0.82rem;">Frontend & GUI</strong><br>
+            Desktop GUI development, JavaScript/HTML/CSS, end-user application features
+          </div>
+          <div class="resume-item-desc">
+            <strong style="color:var(--text); font-size:0.82rem;">Systems</strong><br>
+            Test asset bring-up, network configuration, hardware-software integration
+          </div>
+        </div>
+
+        <h3 style="margin-top:2rem;">Education</h3>
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">B.S. Engineering — 3.793 GPA</span>
+            <span class="resume-item-date">2022</span>
+          </div>
+          <div class="resume-item-org">James Madison University</div>
+          <div class="resume-item-desc">Minors: Mathematics, Physics, Honors. President's List 2019–2021.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearance-banner">
+      <div class="clearance-dot"></div>
+      <p class="clearance-text"><strong>Active Top Secret clearance</strong> granted through U.S. DoD. Transferable to eligible employers.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="footer-name">© 2026 Kris Krueger</span>
+  <div class="footer-links">
+    <a href="mailto:kris64aom@yahoo.com">Email</a>
+    <a href="https://linkedin.com/in/kristopher-krueger" target="_blank">LinkedIn</a>
+    <a href="https://github.com" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
+
+  function setActive() {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+</script>
+</body>
+</html>
