@@ -69,6 +69,100 @@
   .nav-links a:hover { color: var(--text); }
   .nav-links a.active { color: var(--accent); }
 
+  /* PROJECT CARD WITH IMAGE */
+  .project-card-img {
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .project-visual {
+    width: 160px;
+    height: 120px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+  }
+  .project-visual canvas,
+  .project-visual img,
+  .project-visual svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .project-visual-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1.5px dashed var(--border-hover);
+    border-radius: 6px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding: 0.75rem;
+    line-height: 1.5;
+  }
+
+  /* RUNNING PHOTOS */
+  .running-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  .running-photo {
+    aspect-ratio: 4/3;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .running-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .running-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1.5px dashed var(--border-hover);
+    border-radius: 8px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding: 1rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .project-card-img { grid-template-columns: 1fr; }
+    .project-visual { width: 100%; height: 180px; }
+    .running-photos { grid-template-columns: 1fr 1fr; }
+  }
+
   /* MAIN LAYOUT */
   main { padding-top: var(--nav-h); }
   section {
@@ -571,9 +665,9 @@
   <ul class="nav-links">
     <li><a href="#home" class="active">Home</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#resume">Resume</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#running">Running</a></li>
-    <li><a href="#resume">Resume</a></li>
   </ul>
 </nav>
 
@@ -610,13 +704,13 @@
       <div class="about-bio">
         <h2>Software engineer<br><strong>and team lead.</strong></h2>
         <p>
-          I'm a software engineer with 4+ years at Northrop Grumman writing automation platforms, shipping GUI features, deploying software at scale with <em>Ansible and Jenkins</em>, and leading engineering teams through complex delivery cycles.
+          I'm a software engineer with 4+ years at Northrop Grumman writing automation platforms in <em><strong>Python</strong>, <strong>Tcl</strong>, and <strong>Bash</strong></em>, shipping GUI features, deploying software at scale with <em>Ansible and Jenkins</em>, and leading engineering teams through complex delivery cycles.
         </p>
         <p>
-          I write production Python, run sprint planning, mentor engineers, manage codebases, stand up networked test environments, and build software that engineering teams use daily to validate flight hardware.
+          I write production <em><strong>Python</strong> and <strong>Tcl</strong></em> software, run sprint planning, mentor engineers, manage codebases, stand up networked test environments, and build software that engineering teams use daily to validate flight hardware.
         </p>
         <p>
-          Outside of work I run an e-commerce business with real software behind it, work on lower-level C programming, and train for ultramarathons.
+          Outside of work I run an e-commerce business with real <strong>Python</strong> software behind it, work on lower-level <strong>C</strong> programming, and train for ultramarathons.
         </p>
         <p>
           Currently looking for a <em>commercial software engineering role</em> where reliability and technical depth are valued.
@@ -677,16 +771,123 @@
 
   <div class="section-divider"></div>
 
+  <!-- RESUME -->
+  <section id="resume">
+    <p class="section-label">Resume</p>
+    <div class="resume-intro">
+      <h2>Background and <strong>experience.</strong></h2>
+      <p>4+ years in software engineering and team leadership. Condensed version below, full resume available to download.</p>
+      <div class="resume-downloads">
+        <a href="KrisKruegerResumeWeb.pdf" class="btn btn-primary" download>Download Resume ↓</a>
+        <a href="https://linkedin.com/in/kristopher-krueger" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <div class="resume-layout">
+      <div class="resume-section">
+        <h3>Experience</h3>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Engineering Lead · Test Software Eng.</span>
+            <span class="resume-item-date">2024–Now</span>
+          </div>
+          <div class="resume-item-org">Northrop Grumman</div>
+          <div class="resume-item-desc">Deputy Product Owner and SME for a large GUI-based test platform. Deploy software at scale with Ansible/Jenkins. Build features in Python, Tcl, Bash. Lead team operations and mentor engineers.</div>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Systems & Integration Engineer</span>
+            <span class="resume-item-date">2022–2024</span>
+          </div>
+          <div class="resume-item-org">Northrop Grumman</div>
+          <div class="resume-item-desc">Automated hardware testing, analyzed flight equipment data, delivered 25 RF systems and computers, developed test software features.</div>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Software & Hardware Eng. Intern</span>
+            <span class="resume-item-date">2021–2022</span>
+          </div>
+          <div class="resume-item-org">AEVEX Aerospace</div>
+          <div class="resume-item-desc">Led R&D project to prototype a wireless touchscreen device for aircraft maintenance. Designed LiDAR mounting system with full CAD models.</div>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">Undergraduate Research Assistant</span>
+            <span class="resume-item-date">2019–2022</span>
+          </div>
+          <div class="resume-item-org">James Madison University</div>
+          <div class="resume-item-desc">Built MATLAB and Python tools for molecular spectra analysis. Maintained physical chemistry lab equipment.</div>
+        </div>
+      </div>
+
+      <div class="resume-section">
+        <h3>Skills</h3>
+        <div class="resume-item">
+          <div class="resume-item-desc" style="margin-bottom:0.75rem;">
+            <strong style="color:var(--text); font-size:0.82rem;">Languages</strong><br>
+            Python, Bash, C, Tcl, JavaScript, HTML/CSS, MATLAB
+          </div>
+          <div class="resume-item-desc" style="margin-bottom:0.75rem;">
+            <strong style="color:var(--text); font-size:0.82rem;">Infrastructure & DevOps</strong><br>
+            Ansible, Jenkins, Git, BitBucket, CI/CD pipelines
+          </div>
+          <div class="resume-item-desc" style="margin-bottom:0.75rem;">
+            <strong style="color:var(--text); font-size:0.82rem;">Frontend & GUI</strong><br>
+            Desktop GUI development, JavaScript/HTML/CSS, end-user application features
+          </div>
+          <div class="resume-item-desc">
+            <strong style="color:var(--text); font-size:0.82rem;">Systems</strong><br>
+            Test asset bring-up, network configuration, hardware-software integration
+          </div>
+        </div>
+
+        <h3 style="margin-top:2rem;">Education</h3>
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <span class="resume-item-title">B.S. Engineering — 3.793 GPA</span>
+            <span class="resume-item-date">2022</span>
+          </div>
+          <div class="resume-item-org">James Madison University</div>
+          <div class="resume-item-desc">Minors: Mathematics, Physics, Honors. President's List 2019–2021.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearance-banner">
+      <div class="clearance-dot"></div>
+      <p class="clearance-text"><strong>Active Top Secret clearance</strong> granted through U.S. DoD. Transferable to eligible employers.</p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
   <!-- PROJECTS -->
   <section id="projects">
     <p class="section-label">Projects</p>
     <h2 class="projects-intro">Projects and <strong>side work.</strong></h2>
     <p class="projects-sub">Tools and programs I've written outside of my day job, plus the business behind most of them.</p>
 
-    <div class="project-card">
-      <div class="project-header">
-        <span class="project-name">Price Automation Tool</span>
-        <span class="project-badge badge-green">Active</span>
+    <!-- Price Automation Tool -->
+    <div class="project-card project-card-img">
+      <div class="project-card-content">
+        <div class="project-header">
+          <span class="project-name">Price Automation Tool</span>
+          <span class="project-badge badge-green">Active</span>
+        </div>
+        <p class="project-desc">
+          A Python program that cycles through my LEGO inventory listings on BrickLink and eBay, analyzes price history and sale velocity, and adjusts prices based on configurable rules. Supports item exclusions, cache management, and custom filters. Replaced a process that previously took hours of manual work.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">BrickLink API</span>
+          <span class="tech-tag">eBay API</span>
+          <span class="tech-tag">data analysis</span>
+          <span class="tech-tag">automation</span>
+        </div>
       </div>
       <p class="project-desc">
         A Python program that cycles through my LEGO inventory listings on BrickLink and eBay, 
@@ -700,13 +901,27 @@
         <span class="tech-tag">eBay API</span>
         <span class="tech-tag">data analysis</span>
         <span class="tech-tag">automation</span>
+      <div class="project-visual">
+        <img src="photos/bricklinkLogo.PNG" alt="Bricklink">
       </div>
     </div>
 
-    <div class="project-card">
-      <div class="project-header">
-        <span class="project-name">Sales Tracker</span>
-        <span class="project-badge badge-green">Active</span>
+    <!-- Sales Tracker -->
+    <div class="project-card project-card-img">
+      <div class="project-card-content">
+        <div class="project-header">
+          <span class="project-name">Sales Tracker</span>
+          <span class="project-badge badge-green">Active</span>
+        </div>
+        <p class="project-desc">
+          A Python application that aggregates store metrics across my e-commerce operation, tracks sale history, and generates performance reports on demand. Shows what's selling, what's stagnant, and how the store is trending over time.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">data aggregation</span>
+          <span class="tech-tag">reporting</span>
+          <span class="tech-tag">CLI</span>
+        </div>
       </div>
       <p class="project-desc">
         A Python application that aggregates store metrics across my e-commerce operation, 
@@ -718,13 +933,26 @@
         <span class="tech-tag">data aggregation</span>
         <span class="tech-tag">reporting</span>
         <span class="tech-tag">CLI</span>
+      <div class="project-visual">
+        <img src="photos/salesTracker.PNG" alt="Sales Tracker screenshot">
       </div>
     </div>
 
-    <div class="project-card">
-      <div class="project-header">
-        <span class="project-name">Mandelbrot Set Generator</span>
-        <span class="project-badge badge-blue">GitHub</span>
+    <!-- Mandelbrot Set Generator -->
+    <div class="project-card project-card-img">
+      <div class="project-card-content">
+        <div class="project-header">
+          <span class="project-name">Mandelbrot Set Generator</span>
+          <span class="project-badge badge-blue">GitHub</span>
+        </div>
+        <p class="project-desc">
+          A C program that renders the Mandelbrot set as an image. Resolution, coordinate bounds, and iteration depth are all configurable via command-line inputs. Written with a mentor as an exercise in lower-level programming.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">C</span>
+          <span class="tech-tag">graphics</span>
+          <span class="tech-tag">mathematics</span>
+        </div>
       </div>
       <p class="project-desc">
         A C program that renders the Mandelbrot set as an image. Resolution, coordinate bounds, 
@@ -735,6 +963,8 @@
         <span class="tech-tag">C</span>
         <span class="tech-tag">graphics</span>
         <span class="tech-tag">mathematics</span>
+      <div class="project-visual">
+        <img src="photos/mandelbrotHighRes.png" alt="Generated Mandelbrot Image">
       </div>
     </div>
 
@@ -759,7 +989,13 @@
     <div class="project-card">
       <div class="project-header">
         <span class="project-name">This Website</span>
-        <span class="project-badge badge-blue">2026</span>
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-shrink:0;">
+          <a href="https://github.com/kriskrueger/kriskrueger" target="_blank" style="font-family:var(--mono); font-size:0.68rem; color:var(--accent); text-decoration:none; display:flex; align-items:center; gap:0.3rem; opacity:0.8; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub ↗
+          </a>
+          <span class="project-badge badge-blue">2026</span>
+        </div>
       </div>
       <p class="project-desc">
         A personal portfolio site built as a single static HTML file. Covers my professional 
@@ -875,7 +1111,6 @@
         <span class="race-note">Philadelphia, PA</span>
       </div>
     </div>
-  </section>
 
   <div class="section-divider"></div>
 
@@ -889,48 +1124,12 @@
       <div class="resume-downloads">
         <a href="KrisKruegerResumeWeb.pdf" class="btn btn-primary" download>Download Resume ↓</a>
         <a href="https://linkedin.com/in/kristopher-krueger" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+    <div class="running-photos">
+      <div class="running-photo">
+        <img src="seneca50K.png" alt="Seneca 50k">
       </div>
-    </div>
-
-    <div class="resume-layout">
-      <div class="resume-section">
-        <h3>Experience</h3>
-
-        <div class="resume-item">
-          <div class="resume-item-header">
-            <span class="resume-item-title">Engineering Lead · Test Software Eng.</span>
-            <span class="resume-item-date">2024–Now</span>
-          </div>
-          <div class="resume-item-org">Northrop Grumman</div>
-          <div class="resume-item-desc">Deputy Product Owner and SME for a large GUI-based test platform. Deploy software at scale with Ansible/Jenkins. Build features in Python, Tcl, Bash. Lead team operations and mentor engineers.</div>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-item-header">
-            <span class="resume-item-title">Systems & Integration Engineer</span>
-            <span class="resume-item-date">2022–2024</span>
-          </div>
-          <div class="resume-item-org">Northrop Grumman</div>
-          <div class="resume-item-desc">Automated hardware testing, analyzed flight equipment data, delivered 25 RF systems and computers, developed test software features.</div>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-item-header">
-            <span class="resume-item-title">Software & Hardware Eng. Intern</span>
-            <span class="resume-item-date">2021–2022</span>
-          </div>
-          <div class="resume-item-org">AEVEX Aerospace</div>
-          <div class="resume-item-desc">Led R&D project to prototype a wireless touchscreen device for aircraft maintenance. Designed LiDAR mounting system with full CAD models.</div>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-item-header">
-            <span class="resume-item-title">Undergraduate Research Assistant</span>
-            <span class="resume-item-date">2019–2022</span>
-          </div>
-          <div class="resume-item-org">James Madison University</div>
-          <div class="resume-item-desc">Built MATLAB and Python tools for molecular spectra analysis. Maintained physical chemistry lab equipment.</div>
-        </div>
+      <div class="running-photo">
+        <img src="photos/100miler.png" alt="100 Miler">
       </div>
 
       <div class="resume-section">
@@ -963,12 +1162,13 @@
           <div class="resume-item-org">James Madison University</div>
           <div class="resume-item-desc">Minors: Mathematics, Physics, Honors. President's List 2019–2021.</div>
         </div>
+      <div class="running-photo">
+        <!--
+          TO ADD PHOTO 3:
+          <img src="photos/run-photo-3.jpg" alt="Running photo">
+        -->
+        <img src="photos/jfk50miler.png" alt="JFK 50 Miler">
       </div>
-    </div>
-
-    <div class="clearance-banner">
-      <div class="clearance-dot"></div>
-      <p class="clearance-text"><strong>Active Top Secret clearance</strong> granted through U.S. DoD. Transferable to eligible employers.</p>
     </div>
   </section>
 
@@ -999,6 +1199,7 @@
 
   window.addEventListener('scroll', setActive, { passive: true });
   setActive();
+
 </script>
 </body>
 </html>
