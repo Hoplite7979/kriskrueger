@@ -591,30 +591,6 @@ section {
   margin-bottom: 2rem;
 }
 
-.clearance-banner {
-  display: flex; align-items: center; gap: 1rem;
-  padding: 1rem 1.25rem;
-  background: rgba(78,203,141,0.06);
-  border: 1px solid rgba(78,203,141,0.18);
-  border-radius: 8px;
-  margin-top: 2.5rem;
-}
-.clearance-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--green);
-  flex-shrink: 0;
-  animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-.clearance-text {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-.clearance-text strong { color: var(--green); }
-
 /* FOOTER */
 footer {
   border-top: 1px solid var(--border);
